@@ -1,8 +1,8 @@
 <?php
 
-$servername = "evs.database.windows.net";
-$username = "dbadministrator";
-$password = "Ramljane1";
+$servername = "localhost";
+$username = "dbuser";
+$password = "dbpassword";
 $dbname = "evs";
 
 // Create connection
@@ -14,4 +14,3 @@ if ($conn->connect_error) {
 }
 
 ?>
-
