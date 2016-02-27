@@ -62,6 +62,8 @@
     }
 </script>
 
+<footer>version 0.5</footer>
+
 </body>
 
 </html>
