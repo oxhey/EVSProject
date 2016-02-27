@@ -20,16 +20,14 @@
     <link rel="apple-touch-icon" sizes="152x152" href="images/icons/Icon-76@2x.png" />
     <link rel="apple-touch-icon" sizes="58x58" href="images/icons/Icon-Small@2x.png" />
 
-    <!--base href="http://localhost:8080/project/"--> 
-
-    <!-- Compiled and minified CSS -->
+     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
 
     <!-- Material icons from Google -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="http://localhost:8080/project/templates/css/style.css" rel="stylesheet">
+    <link href="http://onlinevote.azurewebsites.net/templates/css/style.css" rel="stylesheet">
 
     <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>

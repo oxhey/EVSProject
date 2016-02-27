@@ -6,15 +6,11 @@ if (isset($_SESSION['User_Role_ID']))
 	if ($_SESSION['User_Role_ID'] == 1)
 		{
         
-        $base = "http://localhost:8080/project/";
-        
-        // echo $base;
-        
-		include $base.'templates/header.php';
+		include '../../templates/header.php';
         
         include '../../config/functions.php';
 
-		include $base.'templates/nav_admin.php';
+		include '../../templates/nav_admin.php';
         
 if (isset($_POST['addq']))
 	{

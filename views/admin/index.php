@@ -6,15 +6,11 @@ if (isset($_SESSION['User_Role_ID']))
 	if ($_SESSION['User_Role_ID'] == 1)
 		{
         
-        $base = "http://localhost:8080/project/";
-        
-        // echo $base;
-        
-		include $base.'templates/header.php';
+		include '../../templates/header.php';
 
-		include $base.'config/connect.php';
+		include '../../config/connect.php';
 
-		include $base.'templates/nav_admin.php';
+		include '../../templates/nav_admin.php';
 
 		echo '
     <div class="container center">
