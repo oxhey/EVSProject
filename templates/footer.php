@@ -71,7 +71,7 @@ function sizeBarChart() {
 </script>
 </script>
 
-<footer>version 0.7</footer>
+<footer>version 0.8.3</footer>
 
 </body>
 
