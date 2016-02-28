@@ -371,7 +371,7 @@ function getQuestionsforSet2()
   <div class="chart-row">
     <p class="chart-caption">' . $data2['AText'] . '</p>
     <div class="bar-wrap">
-      <span>' . $data2['id'] . '%</span>
+      <span>' . $data2['UA'] . '%</span>
       <div class="chart-bar" data-bar-value=' . $data3['UA'] . '%><h6>' . $data3['UA'] . '%</h6></div>
     </div>
   </div>';   
