@@ -36,15 +36,25 @@ echo '
                 </div>
             </div>
         </div>
-        <div class="row">
-               <form method="POST" name="opentest" action="">';
+                <div class="row">
+            <div class="col s12">';
+            
+       
+          
+        
+       echo '
+       <form method="POST" name="opentest" action="">';
+        
         
         getTestSet();
 
         echo '
-        </div>
          <input type="submit" class="waves-effect waves-light btn blue darken-3" name="opentest" value="Open Test">
     </form>
+                    
+        
+           </div>
+        </div>
     </div>';
 	
         
