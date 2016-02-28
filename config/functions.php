@@ -358,12 +358,21 @@ function getQuestionsforSet2()
 
 	while ($data2 = mysqli_fetch_array($result2))
 		{
+        
+        $aid = $data2["id"];
+        
+        $result3 = mysqli_query($conn, "SELECT  COUNT(*) AS UA FROM user_answers WHERE Answer_ID= $aid");
+
+	while ($data3 = mysqli_fetch_array($result3))
+		{
+    
+        
 		echo '   
   <div class="chart-row">
     <p class="chart-caption">' . $data2['AText'] . '</p>
     <div class="bar-wrap">
       <span>' . $data2['id'] . '%</span>
-      <div class="chart-bar" data-bar-value=' . $data2['id'] . '%><h6>' . $data2['id'] . '%</h6></div>
+      <div class="chart-bar" data-bar-value=' . $data3['UA'] . '%><h6>' . $data3['UA'] . '%</h6></div>
     </div>
   </div>';   
 		}
@@ -372,6 +381,8 @@ function getQuestionsforSet2()
     echo'</section>';
 
 	}
+    
+}
 
 
 ?>
