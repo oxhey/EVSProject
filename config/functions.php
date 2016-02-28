@@ -272,8 +272,10 @@ function getTestName()
     $test = $_GET["tid"];
     
 	$result = mysqli_query($conn, "SELECT Name FROM test_set WHERE Test_ID= $test");
-
-		return $data["Name"];
+    
+$testName = mysqli_fetch_assoc($result);
+    
+		return $userID['Name'];
 	}
 
 
