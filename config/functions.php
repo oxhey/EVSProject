@@ -271,12 +271,9 @@ function getTestName()
 
     $test = $_GET["tid"];
     
-	$result = mysqli_query($conn, "SELECT * FROM question WHERE Test_ID= $test");
+	$result = mysqli_query($conn, "SELECT Name FROM test_set WHERE Test_ID= $test");
 
-	while ($data = mysqli_fetch_array($result))
-		{
 		echo $data["Name"];
-		}
 	}
 
 
