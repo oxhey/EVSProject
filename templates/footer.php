@@ -62,7 +62,7 @@
     }
 </script>
 
-<footer>version 0.6</footer>
+<footer>version 0.7</footer>
 
 </body>
 

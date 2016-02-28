@@ -14,7 +14,25 @@ if (isset($_SESSION['User_Role_ID']))
 
 		include '../../templates/nav_admin.php';
         
+        	echo '
+    <div class="container center">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="page-header">
+                    <h2>Results for'; 
+        getTestName(); 
+        echo'</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">';
+        
        getQuestionsforSet();
+        
+           echo'</div>
+    </div>';
+
         
 
     include "../../templates/footer.php";

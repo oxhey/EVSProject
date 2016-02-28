@@ -265,6 +265,21 @@ function getTestSet()
 	echo "</select><label>Choose a Test Set</label></div>";
 	}
 
+function getTestName()
+	{
+	require "connect.php";
+
+    $test = $_GET["tid"];
+    
+	$result = mysqli_query($conn, "SELECT * FROM question WHERE Test_ID= $test");
+
+	while ($data = mysqli_fetch_array($result))
+		{
+		echo $data["Name"];
+		}
+	}
+
+
 function getQuestionsforSet()
 	{
 	require "connect.php";
