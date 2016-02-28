@@ -29,9 +29,7 @@
             $("button").text("End of Test");
         }
     });
-</script>
 
-<script type "text/javascript">
     function save(id,id2,id3,id4) {
         //var id = $("#AncharID").attr("data-myid");  // getting from attr
         //alert(id);
@@ -60,6 +58,17 @@
             }
         });
     }
+    
+ setTimeout(function () {
+    sizeBarChart();
+}, 200);
+    
+function sizeBarChart() {
+    $('.chart-bar').each(function () {
+        $(this).css('width', $(this).data('bar-value'));
+    });
+}
+</script>
 </script>
 
 <footer>version 0.7</footer>
