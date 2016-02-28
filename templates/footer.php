@@ -61,7 +61,7 @@
     
  setTimeout(function () {
     sizeBarChart();
-}, 100);
+}, 10);
     
 function sizeBarChart() {
     $('.chart-bar').each(function () {
