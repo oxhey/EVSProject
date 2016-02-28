@@ -350,7 +350,7 @@ function getQuestionsforSet2()
 	while ($data2 = mysqli_fetch_array($result2))
 		{
 		echo $data2['id'];
-        echpo $data2['AText'];
+        echo $data2['AText'];
         
 		}
     }
