@@ -273,9 +273,11 @@ function getTestName()
     
 	$result = mysqli_query($conn, "SELECT Name FROM test_set WHERE id=$test");
     
-$testName = mysqli_fetch_assoc($result);
+while ($data = mysqli_fetch_array($result))
+		{
+		echo "$data['Name']";
+		}
     
-		echo "$userID['Name']";
 	}
 
 
