@@ -34,14 +34,13 @@
           animation: 750ms ease-out 300ms barBounce;
 }
 
-.chart-bar {
-
-  h6 {
-    color: #fff;
-    left: 1em;
-    line-height: 1;
-    position: absolute;
-    top: 1em;
+.chart-bar h6 {
+    font-size: 16px;
+    color: white;
+    /* font-weight: 700; */
+    /* line-height: 110%; */
+    margin: 0.8rem 0 0.4rem 0;
+    text-align: center;
   }
 }
 
