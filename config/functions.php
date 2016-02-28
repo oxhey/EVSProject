@@ -275,7 +275,7 @@ function getTestName()
     
 $testName = mysqli_fetch_assoc($result);
     
-		return $userID['Name'];
+		echo $userID['Name'];
 	}
 
 
