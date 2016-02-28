@@ -271,7 +271,7 @@ function getTestName()
 
     $test = $_GET["tid"];
     
-	$result = mysqli_query($conn, "SELECT Name FROM test_set WHERE Test_ID= $test");
+	$result = mysqli_query($conn, "SELECT Name FROM test_set WHERE Test_ID=11");
     
 $testName = mysqli_fetch_assoc($result);
     
