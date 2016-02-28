@@ -340,21 +340,22 @@ function getQuestionsforSet2()
     $test = $_GET["tid"];
     
 	$result = mysqli_query($conn, "SELECT * FROM question WHERE Test_ID= $test");
-if (!$result)
-		{
-		printf("Error: %s\n", mysqli_error($conn));
-		exit();
-		}
+
+    echo '        <section class="bar-chart">
+  <h3 class="chart-title">Title</h3>
+  <p class="chart-prompt">Sub Title</p>
+  
+  <ul class="chart-xaxis">
+    <li>0%</li>
+    <li>100%</li>
+  </ul> ';
+    
 	while ($data = mysqli_fetch_array($result))
 		{      
         $quest = $data["id"];
     
     $result2 = mysqli_query($conn, "SELECT * FROM answer WHERE Question_ID= $quest");
-if (!$result2)
-		{
-		printf("Error: %s\n", mysqli_error($conn));
-		exit();
-		}
+
 	while ($data2 = mysqli_fetch_array($result2))
 		{
 		echo '
@@ -363,11 +364,18 @@ if (!$result2)
   <td class="' . $data2['AText'] . '">' . $data2['AText'] . '</td>
   </table>';
         
-        echo $data2['id'];
-        echo $data2['AText'];
-        
+  
+  <div class="chart-row">
+    <p class="chart-caption">' . $data2['AText'] . '</p>
+    <div class="bar-wrap">
+      <span>' . $data2['id'] . '%</span>
+      <div class="chart-bar" data-bar-value="' . $data2['id'] . '"></div>
+    </div>
+  </div>';   
 		}
     }
+    
+    echo'</section>';
 
 	}
 
