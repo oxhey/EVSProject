@@ -294,9 +294,68 @@ function getQuestionsforSet()
 	while ($data = mysqli_fetch_array($result))
 		{
 		echo "<option value='" . $data["id"] . "'>" . $data["QText"] . "</option>";
+        
 		}
 
 	echo "</select><label>Results for Question:</label></div>";
 	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function getQuestionsforSet2()
+	{
+	require "connect.php";
+
+    $test = $_GET["tid"];
+    
+	$result = mysqli_query($conn, "SELECT * FROM question WHERE Test_ID= $test");
+
+	while ($data = mysqli_fetch_array($result))
+		{      
+        $quest = $data["id"];
+    
+    $result2 = mysqli_query($conn, "SELECT * FROM answers WHERE Question_ID= $quest");
+
+	while ($data2 = mysqli_fetch_array($result2))
+		{
+		echo "<option value='" . $data2["id"] . "'>" . $data2["AText"] . "</option>";
+        
+		}
+    }
+
+	echo "</select><label>Results for Question:</label></div>";
+	}
+
 
 ?>
