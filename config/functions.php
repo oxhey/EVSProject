@@ -275,7 +275,7 @@ function getTestName()
     
 while ($data = mysqli_fetch_array($result))
 		{
-		echo "$data['Name']";
+		echo $data['Name'];
 		}
     
 	}
