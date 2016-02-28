@@ -363,6 +363,9 @@ if (!$result2)
   <td class="' . $data2['AText'] . '">' . $data2['AText'] . '</td>
   </table>';
         
+        echo $data2['id'];
+        echo $data2['AText'];
+        
 		}
     }
 
