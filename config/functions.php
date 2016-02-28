@@ -358,13 +358,7 @@ function getQuestionsforSet2()
 
 	while ($data2 = mysqli_fetch_array($result2))
 		{
-		echo '
-        <table>
-          <td>' . $data2['id'] . '</td>
-  <td class="' . $data2['AText'] . '">' . $data2['AText'] . '</td>
-  </table>';
-        
-  
+		echo '   
   <div class="chart-row">
     <p class="chart-caption">' . $data2['AText'] . '</p>
     <div class="bar-wrap">
