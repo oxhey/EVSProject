@@ -1,12 +1,4 @@
-<!-- Load jQuery Validator
-<script src="js/jquery.validate.min.js"></script>
-<script src="js/additional-methods.min.js"></script>
-<script src="js/jquery.tablesorter.min.js"></script>  -->
-
-
 <script>
-    // $("#form_input").validate();
-
     $(document).ready(function () {
 
         $(".button-collapse").sideNav();
@@ -68,7 +60,6 @@ function sizeBarChart() {
         $(this).css('width', $(this).data('bar-value'));
     });
 }
-</script>
 </script>
 
 <footer>version 0.8.3</footer>
