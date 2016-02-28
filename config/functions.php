@@ -340,13 +340,21 @@ function getQuestionsforSet2()
     $test = $_GET["tid"];
     
 	$result = mysqli_query($conn, "SELECT * FROM question WHERE Test_ID= $test");
-
+if (!$result)
+		{
+		printf("Error: %s\n", mysqli_error($conn));
+		exit();
+		}
 	while ($data = mysqli_fetch_array($result))
 		{      
         $quest = $data["id"];
     
     $result2 = mysqli_query($conn, "SELECT * FROM answers WHERE Question_ID= $quest");
-
+if (!$result2)
+		{
+		printf("Error: %s\n", mysqli_error($conn));
+		exit();
+		}
 	while ($data2 = mysqli_fetch_array($result2))
 		{
 		echo '
