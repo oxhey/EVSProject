@@ -273,7 +273,7 @@ function getTestName()
     
 	$result = mysqli_query($conn, "SELECT Name FROM test_set WHERE Test_ID= $test");
 
-		echo $data["Name"];
+		return $data["Name"];
 	}
 
 
