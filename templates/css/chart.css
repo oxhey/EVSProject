@@ -20,6 +20,7 @@
   position: relative;
   -webkit-transition: all 350ms;
   transition: all 350ms;
+    text-align: left !important;
 }
 .chart-row .chart-bar {
   height: 40px;
@@ -32,6 +33,18 @@
   -webkit-animation: 750ms ease-out 300ms barBounce;
           animation: 750ms ease-out 300ms barBounce;
 }
+
+.chart-bar {
+
+  h6 {
+    color: #fff;
+    left: 1em;
+    line-height: 1;
+    position: absolute;
+    top: 1em;
+  }
+}
+
 .chart-row span {
   display: inline-block;
   position: absolute;
