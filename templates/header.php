@@ -28,6 +28,7 @@
 
     <!-- Custom CSS -->
     <link href="http://onlinevote.azurewebsites.net/templates/css/style.css" rel="stylesheet">
+    <link href="http://onlinevote.azurewebsites.net/templates/css/chart.css" rel="stylesheet">
 
     <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
