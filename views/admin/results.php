@@ -20,7 +20,7 @@ if (isset($_SESSION['User_Role_ID']))
             <div class="col-lg-12">
                 <div class="page-header">
                     <h2>Results for'; 
-        getTestName(); 
+        echo getTestName(); 
         echo'</h2>
                 </div>
             </div>
