@@ -27,7 +27,7 @@ if (isset($_SESSION['User_Role_ID']))
                 <p><a href="addSet.php" class="waves-effect waves-light btn-large yellow darken-4 btn-width">New Test Set</a></p>
                 <p><a href="add.php" class="waves-effect waves-light btn-large blue darken-4 btn-width">New Question</a></p>
                 <p><a class="waves-effect waves-light btn-large red darken-4 btn-width">Edit Test</a></p>
-                <p><a class="waves-effect waves-light btn-large green darken-4 btn-width">View Reports</a></p>
+                <p><a href="test.php" class="waves-effect waves-light btn-large green darken-4 btn-width">Live Test</a></p>
             </div>
         </div>
     </div>';
