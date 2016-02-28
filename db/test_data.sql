@@ -78,3 +78,9 @@ INSERT INTO `correct_answer` (`id`, `Question_ID`, `Answer_ID`) VALUES
 (6, 6, 22),
 (7, 7, 28),
 (8, 8, 29);
+
+INSERT INTO `evs`.`user_answers` (`User_ID`,`Test_ID`,`Question_ID`,`Answer_ID`) VALUES
+(1,2,5,18),
+(1,2,6,22),
+(1,2,7,26),
+(1,2,8,30);

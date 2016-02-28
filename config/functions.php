@@ -353,6 +353,9 @@ function getQuestionsforSet2()
 	while ($data = mysqli_fetch_array($result))
 		{      
         $quest = $data["id"];
+        $qtxt = $data["QText"];
+        
+        echo $qtxt;
     
     $result2 = mysqli_query($conn, "SELECT * FROM answer WHERE Question_ID= $quest");
 
