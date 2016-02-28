@@ -28,10 +28,12 @@ if (isset($_SESSION['User_Role_ID']))
 
         <div class="row">';
         
-       getQuestionsforSet2();
+     
         
            echo'</div>
     </div>';
+        
+          getQuestionsforSet2();
 
         
 
