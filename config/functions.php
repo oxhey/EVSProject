@@ -349,7 +349,7 @@ if (!$result)
 		{      
         $quest = $data["id"];
     
-    $result2 = mysqli_query($conn, "SELECT * FROM answers WHERE Question_ID= $quest");
+    $result2 = mysqli_query($conn, "SELECT * FROM answer WHERE Question_ID= $quest");
 if (!$result2)
 		{
 		printf("Error: %s\n", mysqli_error($conn));
