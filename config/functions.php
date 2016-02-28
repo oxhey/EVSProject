@@ -349,7 +349,7 @@ function getQuestionsforSet2()
 
 	while ($data2 = mysqli_fetch_array($result2))
 		{
-		echo $data2['id'];
+		echo "<a>'" . $data2['id'] ."'</a>";
         echo $data2['AText'];
         
 		}
