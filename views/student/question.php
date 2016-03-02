@@ -9,7 +9,6 @@ if (isset($_SESSION['User_Role_ID']))
 
 		include "../../config/connect.php";
         include "../../config/functions.php";
-		//include "../../templates/nav_student.php";
         
         getQuestion();
     

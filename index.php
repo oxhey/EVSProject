@@ -9,14 +9,9 @@ Section      : Login
 include "templates/header.php";
 include "config/functions.php";
 include "config/connect.php";
+include "config/nav.php";
 
 ?>
-
-    <nav>
-        <div class="nav-wrapper grey darken-4">
-            <a class="brand-logo">EVS</a>
-        </div>
-    </nav>
 
     <div class="container">
         <div class="row center">

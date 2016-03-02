@@ -10,7 +10,7 @@ if (isset($_SESSION['User_Role_ID']))
         
         include '../../config/functions.php';
 
-		include '../../templates/nav_admin.php';
+		include '../../templates/nav.php';
         
 if (isset($_POST['addq']))
 	{

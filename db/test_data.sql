@@ -1,5 +1,5 @@
 INSERT INTO `user_role` (`id`, `Name`, `Description`) VALUES
-(1, 'Academic', 'This is a lecturer and has admin privlages'),
+(1, 'Academic', 'This is a lecturer and has admin privileges'),
 (2, 'Student', 'This is a student and can only take tests');
 
 INSERT INTO `user_group` (`id`, `Name`, `Description`) VALUES
