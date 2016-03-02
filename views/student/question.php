@@ -11,9 +11,6 @@ if (isset($_SESSION['User_Role_ID']))
         include "../../config/functions.php";
         
         getQuestion();
-    
-        
-       // echo'<button type="button"  class="waves-effect waves-light btn mcqtest" id="next">Next</button>';
         
     include "../../templates/footer.php";
         
