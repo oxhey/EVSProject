@@ -7,9 +7,9 @@ Section      : Login
 
 <?php 
 include "templates/header.php";
+include "templates/nav.php";
 include "config/functions.php";
 include "config/connect.php";
-include "config/nav.php";
 
 ?>
 
