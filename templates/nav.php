@@ -6,7 +6,7 @@ if (isset($_SESSION['User_Role_ID']))
 
         echo '<div class="navbar-fixed">
 <nav>
-    <div class="nav-wrapper grey darken-4">
+    <div class="nav-wrapper custom">
         <a class="brand-logo">EVS</a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
@@ -36,7 +36,7 @@ if (isset($_SESSION['User_Role_ID']))
             
              echo '<div class="navbar-fixed">
 <nav>
-    <div class="nav-wrapper grey darken-4">
+    <div class="nav-wrapper custom">
         <a class="brand-logo">EVS</a>
         <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
         <ul class="right hide-on-med-and-down">
@@ -62,7 +62,7 @@ if (isset($_SESSION['User_Role_ID']))
 	{
 	      echo '<div class="navbar-fixed">
   <nav>
-        <div class="nav-wrapper grey darken-4">
+        <div class="nav-wrapper custom">
             <a class="brand-logo">EVS</a>
         </div>
     </nav>
