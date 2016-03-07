@@ -150,7 +150,7 @@ function getQuestion()
 echo "works";
 }
 else {
-    printf("Errormessage: %s\n", $mysqli->error);
+    printf("Errormessage: %s\n", $conn->error);
 }
         
         $stmt2->bind_param("i", $question);
