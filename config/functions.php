@@ -141,9 +141,9 @@ function getQuestion()
 		$testid = $Test_ID;
 		$userid = getID();
         
-        echo $question;
-        echo $testid;
-        echo $userid;
+        //echo $question;
+        //echo $testid;
+        //echo $userid;
 
         
 		$stmt2 = mysqli_prepare($conn, "SELECT id, AText from answer WHERE Question_ID = ?");
@@ -178,9 +178,9 @@ function getQuestion()
         </div>  
     </div>';
     
-    $stmt->close();
-     $stmt2->close();
-     $conn->close();
+    //$stmt->close();
+     //$stmt2->close();
+     //$conn->close();
 	}
 
 function listResults()
