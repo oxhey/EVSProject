@@ -122,6 +122,8 @@ function getQuestion()
          $stmt->execute();
          $stmt->bind_result($id, $Test_ID, $QText);    
     
+    $stmt->store_result();
+    
 	while ($stmt->fetch())
 		{
 		echo '
@@ -184,6 +186,7 @@ else {
         </div>  
     </div>';
     
+    $stmt->free_result();
     $stmt->close();
      $stmt2->close();
      $conn->close();
