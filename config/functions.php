@@ -24,6 +24,7 @@ if (isset($_POST['login']))
 	require "connect.php";
 
 	session_start();
+    
 	if (count($_POST) > 0)
 		{
 		if ($stmt = mysqli_prepare($conn, "SELECT id, Login_ID, Name, User_Role_ID FROM user WHERE Login_ID = ?"));
@@ -35,11 +36,16 @@ if (isset($_POST['login']))
         $stmt->execute();
             
         $stmt->bind_result($id, $Login_ID, $Name, $User_Role_ID);
-            
+        
+         $stmt->store_result();
+        
+        while($stmt->fetch()) 
+        {            
             $_SESSION["Student_DB_ID"] = $id;
 			$_SESSION["Login_ID"] = $Login_ID;
 			$_SESSION["Name"] = $Name;
 			$_SESSION["User_Role_ID"] = $User_Role_ID;
+        
 			switch ($User_Role_ID)
 				{
 			case "2":
@@ -51,9 +57,11 @@ if (isset($_POST['login']))
             default:
                     echo "Invalid ID!"; 
 				} 
+        }
 
     /* close statement */
     $stmt->close();
+    $stmt->free_result();
     $conn->close();
         
 		}
