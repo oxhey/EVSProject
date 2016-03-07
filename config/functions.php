@@ -7,17 +7,31 @@ function getID()
 	{
 	require "connect.php";
 
-	$id = mysqli_query($conn, "SELECT id, Login_ID FROM user WHERE Login_ID = '" . $_SESSION["Login_ID"] . "'") or die(mysqli_error($conn));
-	$userID = mysqli_fetch_assoc($id);
+	$stmt = mysqli_prepare($conn, "SELECT id, Login_ID FROM user WHERE Login_ID = ?");
+    
+    $lid = $_SESSIONJ["Login_ID"];
+    
+    $stmt->bind_param("i", $lid);
+    $stmt->execute();
+    $stmt->bind_result($id, $Login_ID);
+    $stmt->fetch();
+    
+    
+    
+	$userID = $id;
 
-	// echo $userID['id'];
+	echo $userID;
 
-	return $userID['id'];
+	//return $userID['id'];
 	}
 
 
 
-// Prepared Login Start
+// Prepared Login
+// This code logs the user in and redirets them based on
+// what type of user they are.
+// I originaly tried to do this but had to get help to make it work
+// Code fixed by http://stackoverflow.com/questions/35844355/mysqli-prepared-statement-not-wokring
 
 if (isset($_POST['login'])) {
     require "connect.php";
@@ -26,6 +40,7 @@ if (isset($_POST['login'])) {
 
     if (count($_POST) > 0) {
         if ($stmt = mysqli_prepare($conn, "SELECT id, Login_ID, Name, User_Role_ID FROM user WHERE Login_ID = ?")) {
+            
             $lid = $_POST["id"];
 
             $stmt->bind_param("i", $lid);
@@ -56,9 +71,7 @@ if (isset($_POST['login'])) {
     }
 }
 
-// Prepared Login End
-
-
+// Prepared Open Test Room
 if (isset($_POST['room']))
 	{
 	require "connect.php";
