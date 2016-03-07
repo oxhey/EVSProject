@@ -179,7 +179,7 @@ function getQuestion()
     </div>';
     
     $stmt->close();
-     $stmt2->close();
+     //$stmt2->close();
      $conn->close();
 	}
 
