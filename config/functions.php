@@ -30,13 +30,11 @@ if (isset($_POST['login']))
         
         $lid = $_POST["id"];
             
-        mysqli_stmt_bind_param($stmt, "s", $lid);
+        mysqli_stmt_bind_param($stmt, "i", $lid);
         
-        mysqli_stmt_execute($stmt);
+        $stmt->execute();
             
-        mysqli_stmt_bind_result($stmt, $id, $Login_ID, $Name, $User_Role_ID);
-            
-        mysqli_stmt_fetch($stmt);
+        $stmt->bind_result($id, $Login_ID, $Name, $User_Role_ID);
             
             if (is_array($stmt))
 			{
@@ -62,7 +60,7 @@ if (isset($_POST['login']))
 
     /* close statement */
     $stmt->close();
-$conn->close();
+    $conn->close();
         
 		}
 	}
