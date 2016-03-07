@@ -16,13 +16,11 @@ function getID()
     $stmt->bind_result($id, $Login_ID);
     $stmt->fetch();
     
-    
-    
 	$userID = $id;
 
 	echo $userID;
 
-	//return $userID['id'];
+	//return $userID;
 	}
 
 

@@ -28,8 +28,6 @@ if (isset($_SESSION['User_Role_ID']))
             </div>
         </div>
     </div>';
-        
-        getID();
 
     include "../../templates/footer.php";
 
