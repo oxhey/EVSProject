@@ -120,9 +120,7 @@ function getQuestion()
     
          $stmt->bind_param("i", $tid);
          $stmt->execute();
-         $stmt->bind_result($id, $Test_ID, $QText);
-    printf("Number of rows: %d.\n", $stmt->num_rows);
-    
+         $stmt->bind_result($id, $Test_ID, $QText);    
     
 	while ($stmt->fetch())
 		{
@@ -146,20 +144,21 @@ function getQuestion()
         //echo $userid;
 
         
-//		$stmt2 = mysqli_prepare($conn, "SELECT id, AText from answer WHERE Question_ID = ?");
-//        
-//        $stmt2->bind_param("i", $question);
-//        $stmt2->execute();
-//        $stmt2->bind_result($aid, $AText);
-//         printf("Number of rows: %d.\n", $stmt2->num_rows);
-//        
-//		echo '  <div class="row">
-//            <div class="col s12">';
-//        
-//		while ($stmt2->fetch())
-//			{
-//			echo '<p><a onclick="save(' . $aid . ',' . $question . ',' . $testid . ',' . $userid . ')"  id="AncharID" data-myid="' . $aid . '" class="waves-effect waves-light btn-large blue-grey lighten-2 btn-width mcqtest">' . $AText . '</a></p>';
-//			}
+		$stmt2 = mysqli_prepare($conn, "SELECT id, AText from answer WHERE Question_ID = ?");
+        
+        $stmt2->bind_param("i", $question);
+        $stmt2->execute();
+        $stmt2->bind_result($aid, $AText);
+         printf("Number of rows: %d.\n", $stmt2->num_rows);
+        
+		echo '  <div class="row">
+            <div class="col s12">';
+        
+		while ($stmt2->fetch())
+			{
+            echo "OK";
+			echo '<p><a onclick="save(' . $aid . ',' . $question . ',' . $testid . ',' . $userid . ')"  id="AncharID" data-myid="' . $aid . '" class="waves-effect waves-light btn-large blue-grey lighten-2 btn-width mcqtest">' . $AText . '</a></p>';
+			}
 
 		echo '</div>
         </div>
