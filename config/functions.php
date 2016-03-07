@@ -151,7 +151,7 @@ function getQuestion()
         $stmt2->bind_param("i", $question);
         $stmt2->execute();
         $stmt2->bind_result($aid, $AText);
-        
+         printf("Number of rows: %d.\n", $stmt2->num_rows);
         
 		echo '  <div class="row">
             <div class="col s12">';
@@ -178,9 +178,9 @@ function getQuestion()
         </div>  
     </div>';
     
-    //$stmt->close();
-     //$stmt2->close();
-     //$conn->close();
+    $stmt->close();
+     $stmt2->close();
+     $conn->close();
 	}
 
 function listResults()
