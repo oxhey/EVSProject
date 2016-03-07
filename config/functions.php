@@ -121,7 +121,7 @@ function getQuestion()
          $stmt->bind_param("i", $tid);
          $stmt->execute();
          $stmt->bind_result($id, $Test_ID, $QText);
-    $stmt->num_rows();
+    printf("Number of rows: %d.\n", $stmt->num_rows);
     
     
 	while ($stmt->fetch())
