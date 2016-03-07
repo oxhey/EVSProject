@@ -1,12 +1,11 @@
 <?php
 
 // Functions file. This contain all code that edits the DB.
-// Random 4 digits SELECT FLOOR(0+ RAND() * 10000)
-
 
 // Prepared Return User ID
 // This is used throughtout the functions file
 // It is used as a variable in other functions
+
 function getID()
 	{
 	require "connect.php";
@@ -78,6 +77,7 @@ if (isset($_POST['login'])) {
 // Prepared Enter Room Code
 // This checks if the room coe the user enter is correct and if the room is open
 // The user is redirected depending on the answer
+
 if (isset($_POST['room']))
 	{
 	require "connect.php";
@@ -110,6 +110,12 @@ if (isset($_POST['room']))
     
 	}
 
+
+// Prepared Get Question
+// This function gets questions and answers based in the id of the test currenlty being taken
+// It has a while loop to get a question and another loop inside that to get the answers
+// The answers contain 4 different id's that are passed to a jQuery function to be inserted into the DB
+
 function getQuestion()
 	{
 	require "connect.php";
@@ -141,25 +147,17 @@ function getQuestion()
 		$testid = $Test_ID;
 		$userid = getID();
         
-        //echo $question;
-        //echo $testid;
-        //echo $userid;
-
-        
 		$stmt2 = mysqli_prepare($conn, "SELECT id, Question_ID, AText FROM answer WHERE Question_ID = ?");
         
         $stmt2->bind_param("i", $question);
         $stmt2->execute();
         $stmt2->bind_result($aid, $Question_ID, $AText);
         
-        //printf("Number of rows: %d.\n", $stmt2->num_rows);
-        
 		echo '  <div class="row">
             <div class="col s12">';
         
 		while ($stmt2->fetch())
 			{
-            echo "OK";
 			echo '<p><a onclick="save(' . $aid . ',' . $question . ',' . $testid . ',' . $userid . ')"  id="AncharID" data-myid="' . $aid . '" class="waves-effect waves-light btn-large blue-grey lighten-2 btn-width mcqtest">' . $AText . '</a></p>';
 			}
 
@@ -186,6 +184,9 @@ function getQuestion()
      $conn->close();
 	}
 
+
+
+//New
 function listResults()
 	{
 	require "connect.php";
