@@ -146,18 +146,12 @@ function getQuestion()
         //echo $userid;
 
         
-		//$stmt2 = mysqli_prepare($conn, "SELECT id, Question_ID, AText FROM answer WHERE Question_ID = ?");
-        
-        if ($stmt2 = mysqli_prepare($conn, "SELECT id, Question_ID, AText FROM answer WHERE Question_ID = ?")) {
-echo "works";
-}
-else {
-    printf("Errormessage: %s\n", $conn->error);
-}
+		$stmt2 = mysqli_prepare($conn, "SELECT id, Question_ID, AText FROM answer WHERE Question_ID = ?");
         
         $stmt2->bind_param("i", $question);
         $stmt2->execute();
-        $stmt2->bind_result($aid, $AText);
+        $stmt2->bind_result($id, $Question_ID, $AText);
+        
          printf("Number of rows: %d.\n", $stmt2->num_rows);
         
 		echo '  <div class="row">
