@@ -138,6 +138,8 @@ function getQuestion()
 		$testid = $Test_ID;
 		$userid = getID();
         
+    }
+        
 		$stmt2 = mysqli_prepare($conn, "SELECT id, AText from answer WHERE Question_ID = ?");
         
         $stmt2->bind_param("i", $question);
