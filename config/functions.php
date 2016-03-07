@@ -19,53 +19,43 @@ function getID()
 
 // Prepared Login Start
 
-if (isset($_POST['login']))
-	{
-	require "connect.php";
+if (isset($_POST['login'])) {
+    require "connect.php";
 
-	session_start();
-    
-	if (count($_POST) > 0)
-		{
-		if ($stmt = mysqli_prepare($conn, "SELECT id, Login_ID, Name, User_Role_ID FROM user WHERE Login_ID = ?"));
-        
-        $lid = $_POST["id"];
-            
-        $stmt->bind_param("i", $lid);
-        
-        $stmt->execute();
-            
-        $stmt->bind_result($id, $Login_ID, $Name, $User_Role_ID);
-        
-         $stmt->store_result();
-        
-        while($stmt->fetch()) 
-        {            
+    session_start();
+
+    if (count($_POST) > 0) {
+        if ($stmt = mysqli_prepare($conn, "SELECT id, Login_ID, Name, User_Role_ID FROM user WHERE Login_ID = ?")) {
+            $lid = $_POST["id"];
+
+            $stmt->bind_param("i", $lid);
+            $stmt->execute();
+            $stmt->bind_result($id, $Login_ID, $Name, $User_Role_ID);
+            $stmt->fetch();
+
             $_SESSION["Student_DB_ID"] = $id;
-			$_SESSION["Login_ID"] = $Login_ID;
-			$_SESSION["Name"] = $Name;
-			$_SESSION["User_Role_ID"] = $User_Role_ID;
-        
-			switch ($User_Role_ID)
-				{
-			case "2":
-				header("Location: ../views/student/");
-				break; //Student
-			case "1":
-				header("Location: ../views/admin/");
-				break; //Admin
-            default:
-                    echo "Invalid ID!"; 
-				} 
-        }
+            $_SESSION["Login_ID"] = $Login_ID;
+            $_SESSION["Name"] = $Name;
+            $_SESSION["User_Role_ID"] = $User_Role_ID;
 
-    /* close statement */
-    $stmt->close();
-    $stmt->free_result();
-    $conn->close();
-        
-		}
-	}
+            switch ($User_Role_ID) {
+                case "2":
+                    header("Location: ../views/student/");
+                    break; //Student
+                case "1":
+                    header("Location: ../views/admin/");
+                    break; //Admin
+                default:
+                    echo "Invalid ID!"; 
+            }
+
+            /* close statement */
+            $stmt->close();
+            $conn->close();
+        }
+    }
+}
+
 // Prepared Login End
 
 
