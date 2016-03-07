@@ -22,12 +22,8 @@ if (isset($_SESSION['User_Role_ID']))
                 </div>
             </div>
         </div>';
-
         
-            listResults();
-        
-        getID();
-           
+            listResults();  
 
     include "../../templates/footer.php";
 

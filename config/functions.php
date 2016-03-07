@@ -3,6 +3,10 @@
 // Functions file. This contain all code that edits the DB.
 // Random 4 digits SELECT FLOOR(0+ RAND() * 10000)
 
+
+// Prepared Return User ID
+// This is used throughtout the functions file
+// It is used as a variable in other functions
 function getID()
 	{
 	require "connect.php";
@@ -18,9 +22,12 @@ function getID()
     
 	$userID = $id;
 
-	echo $userID;
+	//echo $userID;
 
-	//return $userID;
+	return $userID;
+    
+     $stmt->close();
+     $conn->close();
 	}
 
 
@@ -69,24 +76,37 @@ if (isset($_POST['login'])) {
     }
 }
 
-// Prepared Open Test Room
+// Prepared Enter Room Code
 if (isset($_POST['room']))
 	{
 	require "connect.php";
 
-	$sql = mysqli_query($conn, "SELECT id, isOpen FROM test_set WHERE Room_Code='" . $_POST["code"] . "'");
-	$row = mysqli_fetch_array($sql);
-	if ($row['isOpen'] == true)
-		{
-		session_start();
-		$_SESSION["Test_ID"] = $row['id'];
-		$room = $row['id'];
-		header("Location: ../views/student/question.php?test=" . $room);
-		}
-	  else
-		{
-		header("Location: ../views/student/closed.php");
-		}
+	$stmt = mysqli_prepare($conn, "SELECT id, isOpen FROM test_set WHERE Room_Code = ?");
+    
+    $cd = $_POST["code"];
+    
+         $stmt->bind_param("s", $cd);
+         $stmt->execute();
+         $stmt->bind_result($id, $isOpen);
+         $stmt->fetch();
+    
+    
+     switch ($isOpen) {
+                case "0":
+                    header("Location: ../views/student/closed.php");
+                    break; //Student
+                case "1":
+                   $_SESSION["Test_ID"] = $id;
+		           $room = $id;
+		          header("Location: ../views/student/question.php?test=" . $room);
+                    break; //Admin
+                default:
+                    echo "Invalid Room Code!"; 
+            }
+
+     $stmt->close();
+            $conn->close();
+    
 	}
 
 function getQuestion()
