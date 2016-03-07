@@ -114,7 +114,7 @@ function getQuestion()
 	{
 	require "connect.php";
 
-	$stmt = mysqli_prepare($conn, "SELECT id, Test_ID, QText from question WHERE Test_ID = ?");
+	$stmt = mysqli_prepare($conn, "SELECT id, Test_ID, QText FROM question WHERE Test_ID = ?");
     
     $tid = $_GET["test"];
     
@@ -144,7 +144,7 @@ function getQuestion()
         //echo $userid;
 
         
-		$stmt2 = mysqli_prepare($conn, "SELECT id, AText from answer WHERE Question_ID = ?");
+		$stmt2 = mysqli_prepare($conn, "SELECT id, Question_ID, AText FROM answer WHERE Question_ID = ?");
         
         $stmt2->bind_param("i", $question);
         $stmt2->execute();
@@ -178,7 +178,7 @@ function getQuestion()
     </div>';
     
     $stmt->close();
-     //$stmt2->close();
+     $stmt2->close();
      $conn->close();
 	}
 
