@@ -30,19 +30,17 @@ if (isset($_POST['login']))
         
         $lid = $_POST["id"];
             
-        mysqli_stmt_bind_param($stmt, "i", $lid);
+        $stmt->bind_param("i", $lid);
         
         $stmt->execute();
             
         $stmt->bind_result($id, $Login_ID, $Name, $User_Role_ID);
             
-            if (is_array($stmt))
-			{
             $_SESSION["Student_DB_ID"] = $id;
 			$_SESSION["Login_ID"] = $Login_ID;
 			$_SESSION["Name"] = $Name;
 			$_SESSION["User_Role_ID"] = $User_Role_ID;
-			switch ($row["User_Role_ID"])
+			switch ($User_Role_ID)
 				{
 			case "2":
 				header("Location: ../views/student/");
