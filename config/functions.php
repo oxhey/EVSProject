@@ -147,8 +147,7 @@ function getQuestion()
 		//$stmt2 = mysqli_prepare($conn, "SELECT id, Question_ID, AText FROM answer WHERE Question_ID = ?");
         
         if ($stmt2 = mysqli_prepare($conn, "SELECT id, Question_ID, AText FROM answer WHERE Question_ID = ?")) {
-    $stmt->bind_param(...);
-    ...
+echo "works";
 }
 else {
     printf("Errormessage: %s\n", $mysqli->error);
