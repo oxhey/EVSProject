@@ -33,10 +33,9 @@ function getID()
 
 
 // Prepared Login
-// This code logs the user in and redirets them based on
-// what type of user they are.
-// I originaly tried to do this but had to get help to make it work
-// Code fixed by http://stackoverflow.com/questions/35844355/mysqli-prepared-statement-not-wokring
+// This code logs the user in and redirets them based on what type of user they are
+// I originaly tried to do this and got it fixed from:
+// http://stackoverflow.com/questions/35844355/mysqli-prepared-statement-not-wokring
 
 if (isset($_POST['login'])) {
     require "connect.php";
@@ -77,6 +76,8 @@ if (isset($_POST['login'])) {
 }
 
 // Prepared Enter Room Code
+// This checks if the room coe the user enter is correct and if the room is open
+// The user is redirected depending on the answer
 if (isset($_POST['room']))
 	{
 	require "connect.php";
@@ -105,7 +106,7 @@ if (isset($_POST['room']))
             }
 
      $stmt->close();
-            $conn->close();
+     $conn->close();
     
 	}
 
@@ -113,27 +114,43 @@ function getQuestion()
 	{
 	require "connect.php";
 
-	$sql = mysqli_query($conn, "SELECT id, Test_ID, QText from question WHERE Test_ID = '" . $_SESSION["Test_ID"] . "'");
-	while ($data = mysqli_fetch_array($sql))
+	$stmt = mysqli_prepare($conn, "SELECT id, Test_ID, QText from question WHERE Test_ID = ?");
+    
+    $tid = $_SESSION["Test_ID"];
+    
+         $stmt->bind_param("i", $tid);
+         $stmt->execute();
+         $stmt->bind_result($id, $Test_ID, $QText);
+    
+	while ($stmt->fetch())
 		{
 		echo '
-    <div class="question container center" id="' . $data['id'] . '">
+    <div class="question container center" id="' . $id . '">
         <div class="row">
             <div class="col-lg-12">
                 <div class="page-header">
-                    <h5>Q. ' . $data['QText'] . '</h5>
+                    <h5>Q. ' . $QText . '</h5>
                 </div>
             </div>
         </div>';
-		$question = $data['id'];
-		$testid = $data['Test_ID'];
-		$userid = $_SESSION["Student_DB_ID"];
-		$sql2 = mysqli_query($conn, "SELECT id, AText from answer WHERE Question_ID = $question");
+        
+		$question = $id;
+		$testid = $Test_ID;
+		$userid = getID();
+        
+		$stmt2 = mysqli_prepare($conn, "SELECT id, AText from answer WHERE Question_ID = ?");
+        
+        $stmt2->bind_param("i", $question);
+        $stmt2->execute();
+        $stmt2->bind_result($aid, $AText);
+        
+        
 		echo '  <div class="row">
             <div class="col s12">';
-		while ($data2 = mysqli_fetch_array($sql2))
+        
+		while ($stmt2->fetch())
 			{
-			echo '<p><a onclick="save(' . $data2['id'] . ',' . $question . ',' . $testid . ',' . $userid . ')"  id="AncharID" data-myid="' . $data2['id'] . '" class="waves-effect waves-light btn-large blue-grey lighten-2 btn-width mcqtest">' . $data2['AText'] . '</a></p>';
+			echo '<p><a onclick="save(' . $aid . ',' . $question . ',' . $testid . ',' . $userid . ')"  id="AncharID" data-myid="' . $aid . '" class="waves-effect waves-light btn-large blue-grey lighten-2 btn-width mcqtest">' . $AText . '</a></p>';
 			}
 
 		echo '</div>
@@ -152,6 +169,10 @@ function getQuestion()
             </div>
         </div>  
     </div>';
+    
+    $stmt->close();
+     $stmt2->close();
+     $conn->close();
 	}
 
 function listResults()
