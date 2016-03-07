@@ -121,6 +121,8 @@ function getQuestion()
          $stmt->bind_param("i", $tid);
          $stmt->execute();
          $stmt->bind_result($id, $Test_ID, $QText);
+    $stmt->num_rows();
+    
     
 	while ($stmt->fetch())
 		{
@@ -137,8 +139,7 @@ function getQuestion()
 		$question = $id;
 		$testid = $Test_ID;
 		$userid = getID();
-        
-    }
+
         
 		$stmt2 = mysqli_prepare($conn, "SELECT id, AText from answer WHERE Question_ID = ?");
         
