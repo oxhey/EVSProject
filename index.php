@@ -26,7 +26,7 @@ include "config/connect.php";
             <div class="message">
             </div>
             <label for="id" class="sr-only">Your ID</label>
-            <input type="text" id="id" name="id" class="form-control" placeholder="Please Login With Your ID">
+            <input type="text" id="id" name="id" class="form-control" placeholder="Please Login With Your ID" required>
             <br>
             <input type="submit" class="waves-effect waves-light btn blue darken-3" name="login" value="login">
         </form>
