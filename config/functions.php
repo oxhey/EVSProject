@@ -29,8 +29,6 @@ if (isset($_POST['login']))
 		if ($stmt = mysqli_prepare($conn, "SELECT id, Login_ID, Name, User_Role_ID FROM user WHERE Login_ID = ?"));
         
         $lid = $_POST["id"];
-        
-        $lid = "14083313";
             
         mysqli_stmt_bind_param($stmt, "s", $lid);
         
@@ -39,8 +37,6 @@ if (isset($_POST['login']))
         mysqli_stmt_bind_result($stmt, $id, $Login_ID, $Name, $User_Role_ID);
             
         mysqli_stmt_fetch($stmt);
-
-    printf("%s is in district %s\n", $city, $district);
             
             if (is_array($stmt))
 			{
@@ -65,7 +61,8 @@ if (isset($_POST['login']))
             
 
     /* close statement */
-    mysqli_stmt_close($stmt);
+    $stmt->close();
+$conn->close();
         
 		}
 	}
