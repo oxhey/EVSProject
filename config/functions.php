@@ -48,13 +48,9 @@ if (isset($_POST['login']))
 			case "1":
 				header("Location: ../views/admin/");
 				break; //Admin
-				}
-            }
-		  else
-			{
-			echo "Invalid ID!";
-			}
-            
+            default:
+                    echo "Invalid ID!"; 
+				} 
 
     /* close statement */
     $stmt->close();
