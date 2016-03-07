@@ -9,7 +9,7 @@ function getID()
 
 	$stmt = mysqli_prepare($conn, "SELECT id, Login_ID FROM user WHERE Login_ID = ?");
     
-    $lid = $_SESSIONJ["Login_ID"];
+    $lid = $_SESSION["Login_ID"];
     
     $stmt->bind_param("i", $lid);
     $stmt->execute();
