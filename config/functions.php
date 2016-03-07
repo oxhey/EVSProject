@@ -136,9 +136,14 @@ function getQuestion()
             </div>
         </div>';
         
-		$question = $id;
+       
+		$question = $id;        
 		$testid = $Test_ID;
 		$userid = getID();
+        
+        echo $question;
+        echo $testid;
+        echo $userid;
 
         
 		$stmt2 = mysqli_prepare($conn, "SELECT id, AText from answer WHERE Question_ID = ?");
