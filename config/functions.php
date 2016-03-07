@@ -116,7 +116,7 @@ function getQuestion()
 
 	$stmt = mysqli_prepare($conn, "SELECT id, Test_ID, QText from question WHERE Test_ID = ?");
     
-    $tid = $_SESSION["Test_ID"];
+    $tid = "2";
     
          $stmt->bind_param("i", $tid);
          $stmt->execute();
