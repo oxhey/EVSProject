@@ -15,6 +15,10 @@ function getID()
 	return $userID['id'];
 	}
 
+
+
+// Prepared Login Start
+
 if (isset($_POST['login']))
 	{
 	require "connect.php";
@@ -22,20 +26,28 @@ if (isset($_POST['login']))
 	session_start();
 	if (count($_POST) > 0)
 		{
-		$result = mysqli_query($conn, "SELECT id, Login_ID, Name, User_Role_ID FROM user WHERE Login_ID='" . $_POST["id"] . "' ");
-		if (!$result)
-			{
-			printf("Error: %s\n", mysqli_error($conn));
-			exit();
-			}
+		if ($stmt = mysqli_prepare($conn, "SELECT id, Login_ID, Name, User_Role_ID FROM user WHERE Login_ID = ?"));
+        
+        $lid = $_POST["id"];
+        
+        $lid = "14083313";
+            
+        mysqli_stmt_bind_param($stmt, "s", $lid);
+        
+        mysqli_stmt_execute($stmt);
+            
+        mysqli_stmt_bind_result($stmt, $id, $Login_ID, $Name, $User_Role_ID);
+            
+        mysqli_stmt_fetch($stmt);
 
-		$row = mysqli_fetch_array($result);
-		if (is_array($row))
+    printf("%s is in district %s\n", $city, $district);
+            
+            if (is_array($stmt))
 			{
-			$_SESSION["Student_DB_ID"] = $row['id'];
-			$_SESSION["Login_ID"] = $row['Login_ID'];
-			$_SESSION["Name"] = $row['Name'];
-			$_SESSION["User_Role_ID"] = $row['User_Role_ID'];
+            $_SESSION["Student_DB_ID"] = $id;
+			$_SESSION["Login_ID"] = $Login_ID;
+			$_SESSION["Name"] = $Name;
+			$_SESSION["User_Role_ID"] = $User_Role_ID;
 			switch ($row["User_Role_ID"])
 				{
 			case "2":
@@ -45,13 +57,20 @@ if (isset($_POST['login']))
 				header("Location: ../views/admin/");
 				break; //Admin
 				}
-			}
+            }
 		  else
 			{
 			echo "Invalid ID!";
 			}
+            
+
+    /* close statement */
+    mysqli_stmt_close($stmt);
+        
 		}
 	}
+// Prepared Login End
+
 
 if (isset($_POST['room']))
 	{
