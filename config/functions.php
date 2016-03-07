@@ -150,9 +150,9 @@ function getQuestion()
         
         $stmt2->bind_param("i", $question);
         $stmt2->execute();
-        $stmt2->bind_result($id, $Question_ID, $AText);
+        $stmt2->bind_result($aid, $Question_ID, $AText);
         
-         printf("Number of rows: %d.\n", $stmt2->num_rows);
+        //printf("Number of rows: %d.\n", $stmt2->num_rows);
         
 		echo '  <div class="row">
             <div class="col s12">';
