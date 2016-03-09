@@ -5,7 +5,7 @@ if (isset($_POST['login'])) {
 
     require "connect.php";
     
-        if ($stmt = mysqli_prepare($conn, "SELECT id, Login_ID, Name, User_Role_ID FROM user WHERE Login_ID = ?")) {
+       $stmt = mysqli_prepare($conn, "SELECT id, Login_ID, Name, User_Role_ID FROM user WHERE Login_ID = ?") 
             
             $lid = $_POST["id"];
             echo $lid;
@@ -35,7 +35,7 @@ if (isset($_POST['login'])) {
             /* close statement */
             $stmt->close();
             $conn->close();
-        }
+        
     else
     {
         echo "Nope!"; 
