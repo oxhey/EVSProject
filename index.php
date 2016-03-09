@@ -41,10 +41,10 @@ if (isset($_POST['login'])) {
 
             switch ($User_Role_ID) {
                 case "2":
-                    header("Location: ../views/student/");
+                    header("Location: /views/student/");
                     break; //Student
                 case "1":
-                    header("Location: ../views/admin/");
+                    header("Location: /views/admin/");
                     break; //Admin
                 default:
                     echo "Invalid ID!"; 
