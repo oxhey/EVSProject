@@ -36,7 +36,7 @@ function getID()
 // I originaly tried to do this and got it fixed from:
 // http://stackoverflow.com/questions/35844355/mysqli-prepared-statement-not-wokring
 
-if (isset($_POST['submit'])) {
+if (isset($_POST['login'])) {
     require "connect.php";
 
     session_start();
