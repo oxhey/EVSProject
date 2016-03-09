@@ -18,45 +18,6 @@ include "config/connect.php";
 // I originaly tried to do this and got it fixed from:
 // http://stackoverflow.com/questions/35844355/mysqli-prepared-statement-not-wokring
 
-if (isset($_POST['login'])) {
-    require "connect.php";
-
-    session_start();
-
-    if (count($_POST) > 0) {
-        if ($stmt = mysqli_prepare($conn, "SELECT id, Login_ID, Name, User_Role_ID FROM user WHERE Login_ID = ?")) {
-            
-            $lid = $_POST["id"];
-            echo $lid;
-
-            $stmt->bind_param("i", $lid);
-            $stmt->execute();
-            $stmt->bind_result($id, $Login_ID, $Name, $User_Role_ID);
-            $stmt->fetch();
-
-            $_SESSION["Student_DB_ID"] = $id;
-            $_SESSION["Login_ID"] = $Login_ID;
-            $_SESSION["Name"] = $Name;
-            $_SESSION["User_Role_ID"] = $User_Role_ID;
-
-            switch ($User_Role_ID) {
-                case "2":
-                    header("Location: /views/student/");
-                    break; //Student
-                case "1":
-                    header("Location: /views/admin/");
-                    break; //Admin
-                default:
-                    echo "Invalid ID!"; 
-            }
-
-            /* close statement */
-            $stmt->close();
-            $conn->close();
-        }
-    }
-}
-
 ?>
 
     <div class="container">
@@ -68,9 +29,7 @@ if (isset($_POST['login'])) {
             </div>
         </div>
 
-        <form method="post" name="login" action="">
-            <div class="message">
-            </div>
+        <form method="POST" name="login" action="config/functions.php">
             <label for="id" class="sr-only">Your ID</label>
             <input type="text" id="id" name="id" class="form-control" placeholder="Please Login With Your ID" required>
             <br>

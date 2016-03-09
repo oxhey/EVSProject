@@ -37,15 +37,16 @@ function getID()
 // http://stackoverflow.com/questions/35844355/mysqli-prepared-statement-not-wokring
 
 if (isset($_POST['login'])) {
-    require "connect.php";
-
     session_start();
 
+    require "connect.php";
+    
     if (count($_POST) > 0) {
         if ($stmt = mysqli_prepare($conn, "SELECT id, Login_ID, Name, User_Role_ID FROM user WHERE Login_ID = ?")) {
             
             $lid = $_POST["id"];
             echo $lid;
+            echo "test";
 
             $stmt->bind_param("i", $lid);
             $stmt->execute();
