@@ -45,8 +45,6 @@ if (isset($_POST['login'])) {
         if ($stmt = mysqli_prepare($conn, "SELECT id, Login_ID, Name, User_Role_ID FROM user WHERE Login_ID = ?")) {
             
             $lid = $_POST["id"];
-            echo $lid;
-            echo "test";
 
             $stmt->bind_param("i", $lid);
             $stmt->execute();
