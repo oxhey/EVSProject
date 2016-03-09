@@ -1,5 +1,7 @@
 <?php
 
+error_reporting(-1);
+
 // Functions file. This contain all code that edits the DB.
 
 // Prepared Return User ID
