@@ -38,43 +38,41 @@ function getID()
 // I originaly tried to do this and got it fixed from:
 // http://stackoverflow.com/questions/35844355/mysqli-prepared-statement-not-wokring
 
-if (isset($_POST['login'])) {
-    session_start();
-
-    require "connect.php";
-    
-    if (count($_POST) > 0) {
-        if ($stmt = mysqli_prepare($conn, "SELECT id, Login_ID, Name, User_Role_ID FROM user WHERE Login_ID = ?")) {
-            
-            $lid = $_POST["id"];
-
-            $stmt->bind_param("i", $lid);
-            $stmt->execute();
-            $stmt->bind_result($id, $Login_ID, $Name, $User_Role_ID);
-            $stmt->fetch();
-
-            $_SESSION["Student_DB_ID"] = $id;
-            $_SESSION["Login_ID"] = $Login_ID;
-            $_SESSION["Name"] = $Name;
-            $_SESSION["User_Role_ID"] = $User_Role_ID;
-
-            switch ($User_Role_ID) {
-                case "2":
-                    header("Location: ../views/student/");
-                    break; //Student
-                case "1":
-                    header("Location: ../views/admin/");
-                    break; //Admin
-                default:
-                    echo "Invalid ID!"; 
-            }
-
-            /* close statement */
-            $stmt->close();
-            $conn->close();
-        }
-    }
-}
+if (isset($_POST['login']))
+	{
+	require "connect.php";
+	session_start();
+	if (count($_POST) > 0)
+		{
+		$result = mysqli_query($conn, "SELECT id, Login_ID, Name, User_Role_ID FROM user WHERE Login_ID='" . $_POST["id"] . "' ");
+		if (!$result)
+			{
+			printf("Error: %s\n", mysqli_error($conn));
+			exit();
+			}
+		$row = mysqli_fetch_array($result);
+		if (is_array($row))
+			{
+			$_SESSION["Student_DB_ID"] = $row['id'];
+			$_SESSION["Login_ID"] = $row['Login_ID'];
+			$_SESSION["Name"] = $row['Name'];
+			$_SESSION["User_Role_ID"] = $row['User_Role_ID'];
+			switch ($row["User_Role_ID"])
+				{
+			case "2":
+				header("Location: ../views/student/");
+				break; //Student
+			case "1":
+				header("Location: ../views/admin/");
+				break; //Admin
+				}
+			}
+		  else
+			{
+			echo "Invalid ID!";
+			}
+		}
+	}
 
 // Prepared Enter Room Code
 // This checks if the room coe the user enter is correct and if the room is open
