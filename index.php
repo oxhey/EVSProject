@@ -29,7 +29,7 @@ include "config/connect.php";
             </div>
         </div>
 
-        <form method="POST" name="login" action="config/functions.php">
+        <form method="POST" name="login" action="config/login.php">
             <label for="id" class="sr-only">Your ID</label>
             <input type="text" id="id" name="id" class="form-control" placeholder="Please Login With Your ID" required>
             <br>
