@@ -11,13 +11,6 @@ include "templates/nav.php";
 include "config/functions.php";
 include "config/connect.php";
 
-
-
-// Prepared Login
-// This code logs the user in and redirets them based on what type of user they are
-// I originaly tried to do this and got it fixed from:
-// http://stackoverflow.com/questions/35844355/mysqli-prepared-statement-not-wokring
-
 ?>
 
     <div class="container">
@@ -29,7 +22,7 @@ include "config/connect.php";
             </div>
         </div>
 
-        <form method="POST" name="login" action="config/login.php">
+        <form method="POST" name="login" action="config/functions.php">
             <label for="id" class="sr-only">Your ID</label>
             <input type="text" id="id" name="id" class="form-control" placeholder="Please Login With Your ID" required>
             <br>
