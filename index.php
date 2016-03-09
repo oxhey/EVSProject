@@ -22,7 +22,7 @@ include "config/connect.php";
             </div>
         </div>
 
-        <form method="post" name="login" action="/config/functions.php">
+        <form method="post" name="login" action="config/functions.php">
             <div class="message">
             </div>
             <label for="id" class="sr-only">Your ID</label>
