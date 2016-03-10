@@ -205,7 +205,7 @@ WHERE ua.User_ID = ? ");
 
     $stmt->bind_param("ii", $userid, $userid);
     $stmt->execute();
-    $stmt->bind_result($Name, $UA, $Test_ID);
+    $stmt->bind_result($Test_ID, $Name, $UA);
 
 	echo '<table class="striped centered">
         <thead>
