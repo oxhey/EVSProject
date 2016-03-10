@@ -18,13 +18,13 @@ if (isset($_SESSION['User_Role_ID']))
         <div class="row">
             <div class="col-lg-12">
                 <div class="page-header">
-                    <h2>Deep Results</h2>
+                    <h2>In-Depth Results</h2>
                 </div>
             </div>
         </div>';
 
         
-           deepResults();
+           indepthResults();
            
 
     include "../../templates/footer.php";

@@ -238,10 +238,14 @@ WHERE ua.User_ID = ? ");
     
 	}
 
-function deepResults()
-	{
+// Prepared In-Depth Results
+// This function displays the answers for a test given by the user aswell as the correct answer for a question
+// Like othe functions , it has a while loop to get this information
+// Uses an if statment to determin if the current question is the final question and then end the table
+// Fixed by http://stackoverflow.com/questions/35455705/only-display-once-in-while-loop
 
-	// fixed by http://stackoverflow.com/questions/35455705/only-display-once-in-while-loop
+function indepthResults()
+	{
 
 	$test = $_GET["test"];
     
@@ -254,13 +258,7 @@ function deepResults()
     $stmt->bind_param("ii", $test, $userid);
     $stmt->execute();
     $stmt->bind_result($QText, $QId, $uaid, $AText, $caid, $Answer_ID, $IsUserAnswer, $IsCorrectAnswer);
-    
-    echo $QText;
-    echo $QId;
-    echo $AText;
-    echo $IsUserAnswer;
-    echo $IsCorrectAnswer;
-    
+     
 	$lastQuestionID = 0;
     
 	$isTableOpen = false;
@@ -310,18 +308,30 @@ function deepResults()
      $conn->close();
 	}
 
+// Prepared Insert Answer
+// This takes the posted information from a question when a user selects an answer
+// The information is passed here and saved in variables
+// It is then insered into the database
+// Returns a status code to say if it was successful.
+
 if (isset($_POST['answer'], $_POST['question'], $_POST['test'], $_POST['user']))
 	{
 
-	// do something with POST data, save in db.. (make sure to include security when inserting to db)
-
 	require "connect.php";
-
-	$userid = $_POST['user'];
+    
+	$stmt = mysqli_prepare($conn, "INSERT INTO `user_answers`(`User_ID`,`Test_ID`,`Question_ID`,`Answer_ID`) VALUES (?,?,?,?)");
+    
+    '$userid','$testid','$questionid','$answerid')");
+    
+    $stmt->bind_param("iiii", $userid, $testid, $questionid, $answerid");
+        
+    $userid = $_POST['user'];
 	$answerid = $_POST['answer'];
 	$questionid = $_POST['question'];
 	$testid = $_POST['test'];
-	mysqli_query($conn, "INSERT INTO `user_answers`(`User_ID`,`Test_ID`,`Question_ID`,`Answer_ID`) VALUES ('$userid','$testid','$questionid','$answerid')");
+    
+    $stmt->execute();
+    
 	if (mysqli_affected_rows($conn))
 		{
 		echo json_encode(array(
