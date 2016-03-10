@@ -197,16 +197,15 @@ function listResults()
 
 	// echo $userid;
 
-	$result2 = mysqli_query($conn, "SELECT DISTINCT(ua.Test_ID),ts.Name,
-    (select count(*) from user_answers t where t.Test_ID = ua.Test_ID AND t.User_ID = '" . $userid . "') as UA
+	$stmt = mysqli_prepare($conn, "SELECT DISTINCT(ua.Test_ID),ts.Name,
+    (select count(*) from user_answers t where t.Test_ID = ua.Test_ID AND t.User_ID = ?) as UA
     FROM user_answers ua
 INNER JOIN test_set ts ON ts.id = ua.Test_ID
-WHERE ua.User_ID = '" . $userid . "' ");
-	if (!$result2)
-		{
-		printf("Error: %s\n", mysqli_error($conn));
-		exit();
-		}
+WHERE ua.User_ID = ? ");
+
+    $stmt->bind_param("ii", $userid,$userid);
+    $stmt->execute();
+    $stmt->bind_result($Name, $UA, $Test_ID);
 
 	echo '<table class="striped centered">
         <thead>
@@ -220,11 +219,11 @@ WHERE ua.User_ID = '" . $userid . "' ");
         <tbody>
         <div class="row">
             <div class="col s12">';
-	while ($data = mysqli_fetch_array($result2))
+	while ($stmt->fetch())
 		{
 		echo '<tr>
-            <td>' . $data['Name'] . '</td>
-            <td>' . $data['UA'] . '</td>
+            <td>' . $Name . '</td>
+            <td>' . $UA . '</td>
             <td><a href="deep_results.php?test=' . $data['Test_ID'] . '&user=' . $userid . '">View Test</a></td>
           </tr>';
 		}
@@ -234,6 +233,10 @@ WHERE ua.User_ID = '" . $userid . "' ");
       </div>
         </div>
     </div>';
+
+    $stmt->close();
+     $conn->close();
+    
 	}
 
 function deepResults()
