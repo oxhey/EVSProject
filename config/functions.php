@@ -31,8 +31,6 @@ function getID()
      $conn->close();
 	}
 
-
-
 // Prepared Login
 // This code logs the user in and redirets them based on what type of user they are
 // I originaly tried to do this and got it fixed from:
@@ -112,7 +110,6 @@ if (isset($_POST['room']))
     
 	}
 
-
 // Prepared Get Question
 // This function gets questions and answers based in the id of the test currenlty being taken
 // It has a while loop to get a question and another loop inside that to get the answers
@@ -186,9 +183,11 @@ function getQuestion()
      $conn->close();
 	}
 
+// Prepared List Results
+// This function displays the each test taken & the number of recived answers
+// It has a while loop that gets each test details
+// Displays a link to view in depth results for each test
 
-
-//New
 function listResults()
 	{
 	require "connect.php";
@@ -248,7 +247,7 @@ function deepResults()
 	$userid = $_GET["user"];
 	require "connect.php";
 
-	$result = mysqli_query($conn, "SELECT
+	$stmt = mysqli_prepare($conn, "SELECT
     q.QText, q.id AS QId, ua.id, a.AText, ca.id, ca.Answer_ID,
     case when a.id = ua.Answer_ID then 'x' else NULL end as IsUserAnswer , 
     case when a.id = ca.Answer_ID then 'y' else NULL end as IsCorrectAnswer 
@@ -256,13 +255,19 @@ function deepResults()
 INNER JOIN question q ON q.id = ua.Question_ID
 INNER JOIN answer a ON a.Question_ID = q.id 
 INNER JOIN correct_answer ca ON ca.Question_ID = q.id 
-WHERE ua.Test_ID=$test AND ua.User_ID=$userid 
-ORDER BY q.ID") or die(mysqli_error($conn));
+WHERE ua.Test_ID = ? AND ua.User_ID = ? ORDER BY q.ID");
+    
+     $stmt->bind_param("ii", $test, $userid);
+    $stmt->execute();
+    $stmt->bind_result($QText, $Qid, $AText, $IsUserAnswer, $IsCorrectAnswer);
+    
 	$lastQuestionID = 0;
+    
 	$isTableOpen = false;
-	while ($data2 = mysqli_fetch_array($result))
+    
+	while ($stmt->fetch())
 		{
-		if ($data2['QId'] != $lastQuestionID)
+		if ($QId != $lastQuestionID)
 			{
 			if ($isTableOpen)
 				{
@@ -270,7 +275,8 @@ ORDER BY q.ID") or die(mysqli_error($conn));
 				}
 
 			$isTableOpen = true;
-			echo '<p>Q. ' . $data2['QText'] . '</p>
+            
+			echo '<p>Q. ' . $QText . '</p>
     <table class="striped centered">
       <thead>
         <tr>
@@ -283,17 +289,19 @@ ORDER BY q.ID") or die(mysqli_error($conn));
 
 		echo '
   <tr>
-  <td>' . $data2['AText'] . '</td>
-  <td class="' . $data2['IsUserAnswer'] . '">' . $data2['IsUserAnswer'] . '</td>
-  <td class="' . $data2['IsCorrectAnswer'] . '">' . $data2['IsCorrectAnswer'] . '</td>
+  <td>' . $AText . '</td>
+  <td class="' . $IsUserAnswer . '">' . $IsUserAnswer . '</td>
+  <td class="' . $IsCorrectAnswer . '">' . $IsCorrectAnswer . '</td>
   </tr>';
-		$lastQuestionID = $data2['QId'];
+		$lastQuestionID = $QId;
 		}
 
 	if ($isTableOpen)
 		{ // Close last table
 		echo '</table>';
 		}
+    $stmt->close();
+     $conn->close();
 	}
 
 if (isset($_POST['answer'], $_POST['question'], $_POST['test'], $_POST['user']))
