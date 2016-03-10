@@ -244,7 +244,9 @@ function deepResults()
 	// fixed by http://stackoverflow.com/questions/35455705/only-display-once-in-while-loop
 
 	$test = $_GET["test"];
+    
 	$userid = $_GET["user"];
+    
 	require "connect.php";
 
 	$stmt = mysqli_prepare($conn, "SELECT q.QText, q.id AS QId, ua.id, a.AText, ca.id, ca.Answer_ID,
@@ -252,12 +254,12 @@ function deepResults()
     case when a.id = ca.Answer_ID then 'y' else NULL end as IsCorrectAnswer FROM user_answers ua INNER JOIN question q ON q.id = ua.Question_ID 
     INNER JOIN answer a ON a.Question_ID = q.id 
     INNER JOIN correct_answer ca ON ca.Question_ID = q.id 
-    WHERE ua.Test_ID = ? AND ua.User_ID = ? ORDER BY q.ID");
+    WHERE ua.Test_ID = ? AND ua.User_ID = ? ORDER BY q.id");
     
     
     $stmt->bind_param("ii", $test, $userid);
     $stmt->execute();
-    $stmt->bind_result($QText, $Qid, $AText, $IsUserAnswer, $IsCorrectAnswer);
+    $stmt->bind_result($QText, $QId, $AText, $IsUserAnswer, $IsCorrectAnswer);
     
     
     echo $QText;
