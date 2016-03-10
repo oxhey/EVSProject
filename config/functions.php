@@ -203,7 +203,7 @@ function listResults()
 INNER JOIN test_set ts ON ts.id = ua.Test_ID
 WHERE ua.User_ID = ? ");
 
-    $stmt->bind_param("ii", $userid,$userid);
+    $stmt->bind_param("ii", $userid, $userid);
     $stmt->execute();
     $stmt->bind_result($Name, $UA, $Test_ID);
 
@@ -224,7 +224,7 @@ WHERE ua.User_ID = ? ");
 		echo '<tr>
             <td>' . $Name . '</td>
             <td>' . $UA . '</td>
-            <td><a href="deep_results.php?test=' . $data['Test_ID'] . '&user=' . $userid . '">View Test</a></td>
+            <td><a href="deep_results.php?test=' . $Test_ID . '&user=' . $userid . '">View Test</a></td>
           </tr>';
 		}
 
