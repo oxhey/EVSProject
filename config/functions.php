@@ -249,18 +249,11 @@ function deepResults()
     
 	require "connect.php";
 
-	$stmt = mysqli_prepare($conn, "SELECT q.QText, q.id AS QId, ua.id, a.AText, ca.id, ca.Answer_ID,
-    case when a.id = ua.Answer_ID then 'x' else NULL end as IsUserAnswer , 
-    case when a.id = ca.Answer_ID then 'y' else NULL end as IsCorrectAnswer FROM user_answers ua INNER JOIN question q ON q.id = ua.Question_ID 
-    INNER JOIN answer a ON a.Question_ID = q.id 
-    INNER JOIN correct_answer ca ON ca.Question_ID = q.id 
-    WHERE ua.Test_ID = ? AND ua.User_ID = ? ORDER BY q.id");
-    
+	$stmt = mysqli_prepare($conn, "SELECT q.QText, q.id AS QId, ua.id, a.AText, ca.id, ca.Answer_ID, case when a.id = ua.Answer_ID then 'x' else NULL end as IsUserAnswer , case when a.id = ca.Answer_ID then 'y' else NULL end as IsCorrectAnswer FROM user_answers ua INNER JOIN question q ON q.id = ua.Question_ID INNER JOIN answer a ON a.Question_ID = q.id INNER JOIN correct_answer ca ON ca.Question_ID = q.id WHERE ua.Test_ID = ? AND ua.User_ID = ? ORDER BY q.id");
     
     $stmt->bind_param("ii", $test, $userid);
     $stmt->execute();
-    $stmt->bind_result($QText, $QId, $AText, $IsUserAnswer, $IsCorrectAnswer);
-    
+    $stmt->bind_result($QText, $QId, $uaid, $AText, $caid, $Answer_ID, $IsUserAnswer, $IsCorrectAnswer);
     
     echo $QText;
     echo $QId;
