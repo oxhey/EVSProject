@@ -321,9 +321,7 @@ if (isset($_POST['answer'], $_POST['question'], $_POST['test'], $_POST['user']))
     
 	$stmt = mysqli_prepare($conn, "INSERT INTO `user_answers`(`User_ID`,`Test_ID`,`Question_ID`,`Answer_ID`) VALUES (?,?,?,?)");
     
-    '$userid','$testid','$questionid','$answerid')");
-    
-    $stmt->bind_param("iiii", $userid, $testid, $questionid, $answerid");
+    $stmt->bind_param("iiii", $userid, $testid, $questionid, $answerid);
         
     $userid = $_POST['user'];
 	$answerid = $_POST['answer'];
@@ -345,6 +343,7 @@ if (isset($_POST['answer'], $_POST['question'], $_POST['test'], $_POST['user']))
 		));
 		}
 	}
+    
 
 // -------------------------------- Admin Stuff -------------------------------
 
