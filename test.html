@@ -1,0 +1,44 @@
+<div class="m-chart" style="max-width:400px;">
+    <h3>Your Label</h3>
+  <canvas id="clients"></canvas>
+
+</div>
+</div>
+
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/Chart.js/1.0.1-beta.4/Chart.min.js'></script>
+
+<script>
+    var barData = {
+    labels: [
+        'Answer 1',
+        'Answer 2',
+        'Answer 3',
+        'Answer 4'
+    ],
+    datasets: [
+        {
+            label: 'Number of people who chose:',
+            fillColor: '#382765',
+            data: [
+                25,
+                19,
+                10,
+                61
+            ]
+        }
+    ]
+};
+Chart.defaults.global.responsive = true;
+
+var context = document.getElementById('clients').getContext('2d');
+var clientsChart = new Chart(context).Bar(barData);
+    
+        
+clientsChart.datasets[0].bars[0].fillColor = "green"; //bar 1
+   clientsChart.datasets[0].bars[1].fillColor = "orange"; //bar 2
+   clientsChart.datasets[0].bars[2].fillColor = "red"; //bar 3
+    clientsChart.datasets[0].bars[3].fillColor = "blue"; //bar 3
+    clientsChart.update();
+
+</script>
