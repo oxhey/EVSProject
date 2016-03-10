@@ -261,6 +261,15 @@ WHERE ua.Test_ID = ? AND ua.User_ID = ? ORDER BY q.ID");
     $stmt->execute();
     $stmt->bind_result($QText, $Qid, $AText, $IsUserAnswer, $IsCorrectAnswer);
     
+    
+    echo $QText;
+    echo $QId;
+    echo $AText;
+    echo $IsUserAnswer;
+    echo $IsCorrectAnswer;
+    
+    
+    
 	$lastQuestionID = 0;
     
 	$isTableOpen = false;
