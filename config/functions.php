@@ -247,17 +247,15 @@ function deepResults()
 	$userid = $_GET["user"];
 	require "connect.php";
 
-	$stmt = mysqli_prepare($conn, "SELECT
-    q.QText, q.id AS QId, ua.id, a.AText, ca.id, ca.Answer_ID,
+	$stmt = mysqli_prepare($conn, "SELECT q.QText, q.id AS QId, ua.id, a.AText, ca.id, ca.Answer_ID,
     case when a.id = ua.Answer_ID then 'x' else NULL end as IsUserAnswer , 
-    case when a.id = ca.Answer_ID then 'y' else NULL end as IsCorrectAnswer 
-    FROM user_answers ua
-INNER JOIN question q ON q.id = ua.Question_ID
-INNER JOIN answer a ON a.Question_ID = q.id 
-INNER JOIN correct_answer ca ON ca.Question_ID = q.id 
-WHERE ua.Test_ID = ? AND ua.User_ID = ? ORDER BY q.ID");
+    case when a.id = ca.Answer_ID then 'y' else NULL end as IsCorrectAnswer FROM user_answers ua INNER JOIN question q ON q.id = ua.Question_ID 
+    INNER JOIN answer a ON a.Question_ID = q.id 
+    INNER JOIN correct_answer ca ON ca.Question_ID = q.id 
+    WHERE ua.Test_ID = ? AND ua.User_ID = ? ORDER BY q.ID");
     
-     $stmt->bind_param("ii", $test, $userid);
+    
+    $stmt->bind_param("ii", $test, $userid);
     $stmt->execute();
     $stmt->bind_result($QText, $Qid, $AText, $IsUserAnswer, $IsCorrectAnswer);
     
@@ -267,8 +265,6 @@ WHERE ua.Test_ID = ? AND ua.User_ID = ? ORDER BY q.ID");
     echo $AText;
     echo $IsUserAnswer;
     echo $IsCorrectAnswer;
-    
-    
     
 	$lastQuestionID = 0;
     
@@ -284,6 +280,12 @@ WHERE ua.Test_ID = ? AND ua.User_ID = ? ORDER BY q.ID");
 				}
 
 			$isTableOpen = true;
+            
+            echo $QText;
+    echo $QId;
+    echo $AText;
+    echo $IsUserAnswer;
+    echo $IsCorrectAnswer;
             
 			echo '<p>Q. ' . $QText . '</p>
     <table class="striped centered">
