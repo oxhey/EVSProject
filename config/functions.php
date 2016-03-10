@@ -330,7 +330,7 @@ if (isset($_POST['answer'], $_POST['question'], $_POST['test'], $_POST['user']))
     
     $stmt->execute();
     
-	if (mysqli_affected_rows($conn))
+	if ($stmt->affected_rows)
 		{
 		echo json_encode(array(
 			'status' => 1
@@ -342,6 +342,9 @@ if (isset($_POST['answer'], $_POST['question'], $_POST['test'], $_POST['user']))
 			'status' => 0
 		));
 		}
+    
+     $stmt->close();
+     $conn->close();
 	}
     
 
