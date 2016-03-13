@@ -8,7 +8,7 @@ if (isset($_SESSION['User_Role_ID']))
 		include "../../templates/header.php";
 
 		include "../../config/connect.php";
-
+        include "../../config/functions.php";
 		include "../../templates/nav.php";
         
 		echo '
@@ -16,7 +16,9 @@ if (isset($_SESSION['User_Role_ID']))
         <div class="row">
             <div class="col-lg-12">
                 <div class="page-header">
-                    <h2>Student Home</h2>
+                    <h2>Welcome ';
+                getName();
+          echo '</h2>
                 </div>
             </div>
         </div>
@@ -28,6 +30,7 @@ if (isset($_SESSION['User_Role_ID']))
             </div>
         </div>
     </div>';
+        
 
     include "../../templates/footer.php";
 

@@ -1,4 +1,5 @@
 <?php
+
 // Project Name : EVS Final Year Project
 // Author		 : Stefan Lazic
 // Email	 	 : lazis002[at]gmail.com
@@ -23,6 +24,27 @@ function getID()
 	// echo $userID;
 
 	return $userID;
+	$stmt->close();
+	$conn->close();
+	}
+
+// Prepared Return User Name
+// This is used to get the users name and display it on the homepage
+
+function getName()
+	{
+	require "connect.php";
+
+	$stmt = mysqli_prepare($conn, "SELECT Login_ID, Name FROM user WHERE Login_ID = ?");
+	$lid = $_SESSION["Login_ID"];
+	$stmt->bind_param("i", $lid);
+	$stmt->execute();
+	$stmt->bind_result($Login_ID, $Name);
+	$stmt->fetch();
+	echo $Name;
+
+	// echo $Name;
+
 	$stmt->close();
 	$conn->close();
 	}
@@ -88,13 +110,15 @@ if (isset($_POST['room']))
 	case "0":
 		header("Location: ../views/student/closed.php");
 		break;
+
 	case "1":
 		$_SESSION["Test_ID"] = $id;
 		$room = $id;
 		header("Location: ../views/student/question.php?test=" . $room);
-		break; 
+		break;
+
 	default:
-		echo "Invalid Room Code!";
+		header("Location: ../views/student/error.php");
 		}
 
 	$stmt->close();
@@ -152,7 +176,10 @@ function getQuestion()
             <div class="col-lg-12">
                 <div class="page-header">
                     <h5>Thank You</h5>
-                    <p>End of test</p>
+                    <p>You have reached the end of the tes</p>
+                    
+                    <p><a href="index.php" class="waves-effect waves-light btn-large green darken-4 btn-width">Finish Test</a></p>
+                    
                 </div>
             </div>
         </div>  
@@ -374,7 +401,7 @@ function getQuestionsForSet()
 		{
 		$quest = $id;
 		$qtxt = $QText;
-       echo '<h5 class="chart-title">' . $qtxt . '</h5>';
+		echo '<h5 class="chart-title">' . $qtxt . '</h5>';
 		$stmt2 = mysqli_prepare($conn, "SELECT id, AText FROM answer WHERE Question_ID = ?");
 		$stmt2->bind_param("i", $quest);
 		$stmt2->execute();
@@ -386,11 +413,8 @@ function getQuestionsForSet()
 			$stmt3->bind_param("i", $aid);
 			$stmt3->execute();
 			$stmt3->bind_result($UA);
-            $stmt3->store_result();
-			while ($stmt3->fetch())
-                
-                $UA2 = $UA * 3; // just to get numbers up
-            
+			$stmt3->store_result();
+			while ($stmt3->fetch()) $UA2 = $UA * 3; // just to get numbers up
 				{
 				echo '<li>
         <a class="bar">' . $AText . '</a> 
@@ -398,18 +422,17 @@ function getQuestionsForSet()
         <span class="index" style="width: ' . $UA2 . '%">(' . $UA . '%)</span>
       </li>';
 				}
-          
 			}
-  echo '<br>';
-		
+
+		echo '<br />';
 		}
-echo '</ul></div>';
+
+	echo '</ul></div>';
 	$stmt->close();
 	$stmt2->close();
 	$stmt3->close();
 	$conn->close();
 	}
-
 
 // Prepared Get Room Code
 // This function displays the room code for an open room so that students can join.
@@ -419,18 +442,17 @@ function getRoomCode()
 	require "connect.php";
 
 	$test = $_GET["tid"];
-    
 	$stmt = mysqli_prepare($conn, "SELECT Room_Code FROM test_set WHERE id = ?");
 	$stmt->bind_param("i", $test);
 	$stmt->execute();
 	$stmt->bind_result($Room_Code);
-    
-    	while ($stmt->fetch())
+	while ($stmt->fetch())
 		{
 		echo $Room_Code;
 		}
-	
+
 	$stmt->close();
 	$conn->close();
 	}
+
 ?>

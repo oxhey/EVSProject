@@ -1,10 +1,10 @@
 <?php
+
 if (isset($_SESSION['User_Role_ID']))
 	{
 	if ($_SESSION['User_Role_ID'] == 1)
 		{
-
-        echo '<div class="navbar-fixed">
+		echo '<div class="navbar-fixed">
 <nav>
     <div class="nav-wrapper custom">
         <a class="brand-logo">EVS</a>
@@ -26,13 +26,11 @@ if (isset($_SESSION['User_Role_ID']))
     </div>
 </nav>
 </div>';
-
 		}
-	  else if ($_SESSION['User_Role_ID'] == 2)
+	  else
+	if ($_SESSION['User_Role_ID'] == 2)
 		{
-		
-            
-             echo '<div class="navbar-fixed">
+		echo '<div class="navbar-fixed">
 <nav>
     <div class="nav-wrapper custom">
         <a class="brand-logo">EVS</a>
@@ -52,19 +50,17 @@ if (isset($_SESSION['User_Role_ID']))
     </div>
 </nav>
 </div>';
-            
-            
 		}
 	}
   else
 	{
-	      echo '<div class="navbar-fixed">
+	echo '<div class="navbar-fixed">
   <nav>
         <div class="nav-wrapper custom">
             <a class="brand-logo">EVS</a>
         </div>
     </nav>
 </div>';
-      
-	} 
+	}
+
 ?>

@@ -6,7 +6,7 @@
         $('select').material_select();
 
         $('input').css('visibility', 'visible');
-        
+
     });
 
 
@@ -23,7 +23,7 @@
         }
     });
 
-    function save(id,id2,id3,id4) {
+    function save(id, id2, id3, id4) {
         //var id = $("#AncharID").attr("data-myid");  // getting from attr
         //alert(id);
         $.ajax({
@@ -47,13 +47,11 @@
                 }
             },
             error: function (response) {
-               // console.log(response);
+                // console.log(response);
             }
         });
     }
 </script>
-
-<footer>version 0.9.2</footer>
 
 </body>
 

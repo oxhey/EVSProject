@@ -5,9 +5,8 @@ Author : Stefan Lazic
 */
 
 @import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900);
-
 html {
-   /* background-color: #F5F2F0; */
+    /* background-color: #F5F2F0; */
     background-color: #F6F6F9;
     font-family: 'Roboto', sans-serif;
 }
@@ -37,11 +36,11 @@ nav .brand-logo {
     background-color: #1B5E20;
 }
 
+
 /* Once a test is closed successfully hide the room code and button */
-.closed {
-    
-    display: none !important;
-    
+
+.close {
+    text-align: left !important;
 }
 
 .mcqtest {
@@ -93,9 +92,10 @@ nav .brand-logo {
     color: #000;
 }
 
+
 /* nav bar colour */
+
 .custom {
-    
     background-color: #0D47A1;
 }
 
