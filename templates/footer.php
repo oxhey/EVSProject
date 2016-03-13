@@ -6,6 +6,7 @@
         $('select').material_select();
 
         $('input').css('visibility', 'visible');
+        
     });
 
 
@@ -50,19 +51,9 @@
             }
         });
     }
-    
- setTimeout(function () {
-    sizeBarChart();
-}, 10);
-    
-function sizeBarChart() {
-    $('.chart-bar').each(function () {
-        $(this).css('width', $(this).data('bar-value'));
-    });
-}
 </script>
 
-<footer>version 0.9.1</footer>
+<footer>version 0.9.2</footer>
 
 </body>
 

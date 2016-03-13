@@ -37,6 +37,13 @@ nav .brand-logo {
     background-color: #1B5E20;
 }
 
+/* Once a test is closed successfully hide the room code and button */
+.closed {
+    
+    display: none !important;
+    
+}
+
 .mcqtest {
     text-transform: none;
 }

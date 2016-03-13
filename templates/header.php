@@ -11,7 +11,7 @@
     <meta name="HandheldFriendly" content="true" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black" />
-    <meta name="apple-mobile-web-app-title" content="Leaderboard">
+    <meta name="apple-mobile-web-app-title" content="EVS">
     <meta name="viewport" content="initial-scale=1 maximum-scale=1 user-scalable=0 minimal-ui" />
 
     <link rel="apple-touch-icon" href="images/icons/Icon-60@2x.png" />
@@ -27,8 +27,8 @@
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="http://onlinevote.azurewebsites.net/templates/css/style.css" rel="stylesheet">
-    <link href="http://onlinevote.azurewebsites.net/templates/css/chart.css" rel="stylesheet">
+    <link href="http://localhost:8080/evs/templates/css/style.css" rel="stylesheet">
+    <link href="http://localhost:8080/evs/templates/css/chart.css" rel="stylesheet">
 
     <!--[if lt IE 9]>
   <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>

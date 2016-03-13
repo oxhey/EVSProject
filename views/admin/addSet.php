@@ -13,7 +13,10 @@ if (isset($_SESSION['User_Role_ID']))
         require "../../config/connect.php";
 
 		include '../../templates/nav.php';
-        
+
+// Prepared Add Set
+// This function recives a users post and runs a query to add a new set to the DB
+
 if (isset($_POST['adds']))
 	{
     
@@ -26,11 +29,13 @@ if (isset($_POST['adds']))
     
    echo '<script>Materialize.toast("Test set &quot; '.$name.' &quot; was added!", 3000)</script>';
     
-    mysqli_query($conn, "INSERT INTO test_set (Name,Description,isOpen,Group_ID,Room_Code) VALUES ('$name', '$des','$isOpen', '$Group_ID', '$Code')");
-    //$last_id = mysqli_insert_id($conn);
+    $stmt = mysqli_prepare($conn, "INSERT INTO test_set (Name,Description,isOpen,Group_ID,Room_Code) VALUES (?,?,?,?,?)");
+    $stmt->bind_param("ssbis", $name, $des,$isOpen, $Group_ID, $Code);
+    $stmt->execute();
+    //$last_id = $stmt->insert_id;
     
-    
-    
+    $stmt->close();
+	$conn->close();
 
 }
 

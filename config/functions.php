@@ -87,12 +87,12 @@ if (isset($_POST['room']))
 		{
 	case "0":
 		header("Location: ../views/student/closed.php");
-		break; //Student
+		break;
 	case "1":
 		$_SESSION["Test_ID"] = $id;
 		$room = $id;
 		header("Location: ../views/student/question.php?test=" . $room);
-		break; //Admin
+		break; 
 	default:
 		echo "Invalid Room Code!";
 		}
@@ -354,8 +354,9 @@ function getTestName()
 	$conn->close();
 	}
 
-//
-// This function
+// Prepared Get Questions For Set
+// This function gets questions, answers and user answers and displays them in a bar chart
+// This is used when a test is live and the results are coming in
 
 function getQuestionsForSet()
 	{
@@ -367,17 +368,13 @@ function getQuestionsForSet()
 	$stmt->execute();
 	$stmt->bind_result($id, $QText);
 	$stmt->store_result();
-	echo '
-  <section class="bar-chart">
-  <ul class="chart-xaxis">
-    <li>0%</li>
-    <li>100%</li>
-  </ul> ';
+	echo '<div class="section">
+    <ul class="chartlist">';
 	while ($stmt->fetch())
 		{
 		$quest = $id;
 		$qtxt = $QText;
-        echo '<h5 class="chart-title">' . $qtxt . '</h5>';
+       echo '<h5 class="chart-title">' . $qtxt . '</h5>';
 		$stmt2 = mysqli_prepare($conn, "SELECT id, AText FROM answer WHERE Question_ID = ?");
 		$stmt2->bind_param("i", $quest);
 		$stmt2->execute();
@@ -385,31 +382,55 @@ function getQuestionsForSet()
 		$stmt2->store_result();
 		while ($stmt2->fetch())
 			{
-			$anid = $aid;
 			$stmt3 = mysqli_prepare($conn, "SELECT  COUNT(*) AS UA FROM user_answers WHERE Answer_ID = ?");
-			$stmt3->bind_param("i", $anid);
+			$stmt3->bind_param("i", $aid);
 			$stmt3->execute();
 			$stmt3->bind_result($UA);
+            $stmt3->store_result();
 			while ($stmt3->fetch())
+                
+                $UA2 = $UA * 3; // just to get numbers up
+            
 				{
-				echo '   
-  <div class="chart-row">
-    <p class="chart-caption">' . $AText . '</p>
-    <div class="bar-wrap">
-      <span>' . $UA . '%</span>
-      <div class="chart-bar" data-bar-value=' . $UA . '%><h6>' . $UA . '%</h6></div>
-    </div>
-  </div>';
+				echo '<li>
+        <a class="bar">' . $AText . '</a> 
+        <span class="count">' . $UA . '</span>
+        <span class="index" style="width: ' . $UA2 . '%">(' . $UA . '%)</span>
+      </li>';
 				}
+          
 			}
-
+  echo '<br>';
 		
 		}
-echo '</section>';
+echo '</ul></div>';
 	$stmt->close();
 	$stmt2->close();
 	$stmt3->close();
 	$conn->close();
 	}
 
+
+// Prepared Get Room Code
+// This function displays the room code for an open room so that students can join.
+
+function getRoomCode()
+	{
+	require "connect.php";
+
+	$test = $_GET["tid"];
+    
+	$stmt = mysqli_prepare($conn, "SELECT Room_Code FROM test_set WHERE id = ?");
+	$stmt->bind_param("i", $test);
+	$stmt->execute();
+	$stmt->bind_result($Room_Code);
+    
+    	while ($stmt->fetch())
+		{
+		echo $Room_Code;
+		}
+	
+	$stmt->close();
+	$conn->close();
+	}
 ?>

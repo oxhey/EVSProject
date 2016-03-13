@@ -13,16 +13,14 @@ if (isset($_SESSION['User_Role_ID']))
             <li><a href="index.php">Home</a></li>
             <li><a href="addSet.php">New Test Set</a></li>
             <li><a href="add.php">New Question</a></li>
-            <li><a href="#!">Edit</a></li>
-            <li><a href="#!">Report</a></li>
+            <li><a href="openTest.php">Open Test</a></li>
             <li><a href="../../logout.php">Logout</a></li>
         </ul>
         <ul class="side-nav" id="mobile-demo">
             <li><a href="index.php">Home</a></li>
             <li><a href="addSet.php">New Test Set</a></li>
             <li><a href="add.php">New Question</a></li>
-            <li><a href="#!">Edit</a></li>
-            <li><a href="#!">Report</a></li>
+            <li><a href="openTest.php">Open Test</a></li>
             <li><a href="../../logout.php">Logout</a></li>
         </ul>
     </div>

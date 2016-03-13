@@ -12,59 +12,83 @@ if (isset($_SESSION['User_Role_ID']))
 
 		include '../../templates/nav.php';
         
+// Prepared Add Question
+// This function recives a users post and runs queries to enter a question and answers into the DB
+
 if (isset($_POST['addq']))
 	{
-    
+          
     $q = $_POST["question"];
     $ts = $_POST["testset"];
     $a1 = $_POST["a1"];
     $a2 = $_POST["a2"];
     $a3 = $_POST["a3"];
     $a4 = $_POST["a4"];
-    
     $group = $_POST["group1"];
-
     
-   echo ' <script>
-        Materialize.toast("&quot; '.$q.' &quot; added to Questions!", 3000) // 4000 is the duration of the toast
-        </script>';
+    require "../../config/connect.php";
     
-	
-	require "../../config/connect.php";
+    $stmt = mysqli_prepare($conn, "INSERT INTO question (Test_ID, QText) VALUES (?,?)");
+    $stmt->bind_param("is", $ts, $q);
+    $stmt->execute();
+    $last_id = $stmt->insert_id;
     
-    mysqli_query($conn, "INSERT INTO question (Test_ID, QText) VALUES ('$ts', '$q')");
-    $last_id = mysqli_insert_id($conn);
-    //echo $last_id;
-    mysqli_query($conn, "INSERT INTO answer (Question_ID, AText) VALUES ('$last_id', '$a1')");
-     $last_a1 = mysqli_insert_id($conn);
-    mysqli_query($conn, "INSERT INTO answer (Question_ID, AText) VALUES ('$last_id', '$a2')");
-    $last_a2 = mysqli_insert_id($conn);
-    mysqli_query($conn, "INSERT INTO answer (Question_ID, AText) VALUES ('$last_id', '$a3')");
-    $last_a3 = mysqli_insert_id($conn);
-    mysqli_query($conn, "INSERT INTO answer (Question_ID, AText) VALUES ('$last_id', '$a4')");
-    $last_a4 = mysqli_insert_id($conn);
+    $stmt2 = mysqli_prepare($conn, "INSERT INTO answer (Question_ID, AText) VALUES (?,?)");
+    $stmt2->bind_param("is", $last_id, $a1);
+    $stmt2->execute();
+    $last_a1 = $stmt2->insert_id;
     
+    $stmt3 = mysqli_prepare($conn, "INSERT INTO answer (Question_ID, AText) VALUES (?,?)");
+    $stmt3->bind_param("is", $last_id, $a2);
+    $stmt3->execute();
+    $last_a2 = $stmt3->insert_id;
     
+   $stmt4 = mysqli_prepare($conn, "INSERT INTO answer (Question_ID, AText) VALUES (?,?)");
+    $stmt4->bind_param("is", $last_id, $a3);
+    $stmt4->execute();
+    $last_a3 = $stmt4->insert_id;
+    
+    $stmt5 = mysqli_prepare($conn, "INSERT INTO answer (Question_ID, AText) VALUES (?,?)");
+    $stmt5->bind_param("is", $last_id, $a4);
+    $stmt5->execute();
+    $last_a4 = $stmt5->insert_id;
+    
+    $stmt6 = mysqli_prepare($conn, "INSERT INTO correct_answer (Question_ID, Answer_ID) VALUES (?,?)");
     switch ($group)
 				{
 			case "4":
-				  mysqli_query($conn, "INSERT INTO correct_answer (Question_ID, Answer_ID) VALUES ('$last_id', '$last_a4')");
+            $stmt6->bind_param("ii", $last_id, $last_a4);
 				break; //Student
 			case "3":
-				mysqli_query($conn, "INSERT INTO correct_answer (Question_ID, Answer_ID) VALUES ('$last_id', '$last_a3')");
+            $stmt6->bind_param("ii", $last_id, $last_a4);
 				break; //Admin
             case "2":
-				mysqli_query($conn, "INSERT INTO correct_answer (Question_ID, Answer_ID) VALUES ('$last_id', '$last_a2')");
+            $stmt6->bind_param("ii", $last_id, $last_a4);
 				break; //Student
 			case "1":
-				mysqli_query($conn, "INSERT INTO correct_answer (Question_ID, Answer_ID) VALUES ('$last_id', '$last_a1')");
+            $stmt6->bind_param("ii", $last_id, $last_a4);
 				break; 
 				}
-
     
+    $stmt6->execute();
+    
+    $stmt->close();
+	$stmt2->close();
+	$stmt3->close();
+    $stmt4->close();
+	$stmt5->close();
+	$stmt6->close();
+	$conn->close();
+    
+    
+       echo ' <script>
+        Materialize.toast("&quot; '.$q.' &quot; added to Questions!", 3000)
+        </script>';
 
 }
-
+        
+        
+        
         	echo '
     <div class="container center">
         <div class="row">
