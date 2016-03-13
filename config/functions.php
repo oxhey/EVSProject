@@ -269,11 +269,6 @@ function indepthResults()
 				}
 
 			$isTableOpen = true;
-			echo $QText;
-			echo $QId;
-			echo $AText;
-			echo $IsUserAnswer;
-			echo $IsCorrectAnswer;
 			echo '<p>Q. ' . $QText . '</p>
     <table class="striped centered">
       <thead>
