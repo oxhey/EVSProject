@@ -79,9 +79,10 @@ if (isset($_POST['login']))
 				break; //Student
 			case "1":
 				header("Location: ../views/admin/");
-				break; //Admin
+				break; //Student
 			default:
-				echo "Invalid ID!";
+					header("Location: ../views/error.php?eid=1");
+				break; //error
 				}
 
 			/* close statement */
@@ -118,7 +119,7 @@ if (isset($_POST['room']))
 		break;
 
 	default:
-		header("Location: ../views/student/error.php");
+		header("Location: ../views/error.php?eid=2");
 		}
 
 	$stmt->close();

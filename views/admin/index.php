@@ -37,10 +37,12 @@ if (isset($_SESSION['User_Role_ID']))
 		}
 	  else
 		{
-		header("Location: ../");
+		header("Location: ../../views/error.php?eid=4");
 		}
 	}
   else
 	{
-	echo "Please Login First";
-	} ?>
+	header("Location: ../../views/error.php?eid=3");
+	}
+
+?>

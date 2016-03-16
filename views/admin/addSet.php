@@ -90,10 +90,12 @@ if (isset($_POST['adds']))
 		}
 	  else
 		{
-		echo "No";
+		header("Location: ../../views/error.php?eid=4");
 		}
 	}
   else
 	{
-	echo "Please Login First";
-	} ?>	
+	header("Location: ../../views/error.php?eid=3");
+	}
+
+?>	
