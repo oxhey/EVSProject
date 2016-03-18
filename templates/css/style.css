@@ -4,11 +4,11 @@ This is a custome CSS file to chnage some of the default values of the materiali
 Author : Stefan Lazic
 */
 
-@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,700,900);
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,500);
 html {
     /* background-color: #F5F2F0; */
     background-color: #F6F6F9;
-    font-family: 'Roboto', sans-serif;
+    font-family: 'Raleway', sans-serif;
 }
 
 nav .brand-logo {
