@@ -36,10 +36,7 @@ else if ($error == 4)
     $btnName = "Back to Login";
     $btnLink = "../index.php";  
 }
-else if ($error == 5)
-{
-    
-}
+
 
 
 
